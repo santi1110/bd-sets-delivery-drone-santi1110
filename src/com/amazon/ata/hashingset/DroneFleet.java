@@ -1,12 +1,16 @@
 package com.amazon.ata.hashingset;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A fleet of Amazon Delivery Drones.
  */
 public class DroneFleet {
+
+    private Set<DeliveryDrone> droneSet;
 
     List<DeliveryDrone> drones = null;
     
@@ -15,7 +19,9 @@ public class DroneFleet {
      * `DeliveryDrones` can be added.
      */
     public DroneFleet() {
+
         drones = new ArrayList<>();
+        droneSet = new HashSet<>();
     }
 
     /**
@@ -26,7 +32,7 @@ public class DroneFleet {
      * @return true if the drone was not already a member of the fleet, and false if it was already a member.
      */
     public boolean addDrone(DeliveryDrone drone) {
-        return drones.add(drone);
+        return droneSet.add(drone);
     }
 
     /**
@@ -37,7 +43,7 @@ public class DroneFleet {
      * @return true if the drone was part of the fleet and was therefore removed, and false if it was not a member.
      */
     public boolean removeDrone(DeliveryDrone drone) {
-        return drones.remove(drone);
+        return droneSet.remove(drone);
     }
 
     /**
@@ -46,7 +52,7 @@ public class DroneFleet {
      * @return the number of drones in this fleet.
      */
     public int getSize() {
-        return drones.size();
+        return droneSet.size();
     }
 
     /**
@@ -57,7 +63,11 @@ public class DroneFleet {
      * @return true if this fleet contains a drone from the supplied location.
      */ 
     public boolean containsDroneFromLocation(String locationCode) {
-        /* TODO: Implement */
-        return false; 
+        for (DeliveryDrone drone : droneSet) {
+            if (drone.getLocationCode().equals(locationCode)) {
+                return true;
+            }
+        }
+            return false;
+        }
     }
-}
